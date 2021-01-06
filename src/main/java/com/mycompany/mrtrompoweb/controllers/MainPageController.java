@@ -40,13 +40,13 @@ public class MainPageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        
-        List<products> bestSellers = productsDAO.getBestSellers();
-        request.setAttribute("prodBestSellers", bestSellers);
         if(session.getAttribute("userType") == null){
             
         session.setAttribute("userType", "Anon");
         }
+        List<products> bestSellers = productsDAO.getBestSellers();
+        request.setAttribute("prodBestSellers", bestSellers);
+        
 
         String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         
