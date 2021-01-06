@@ -39,7 +39,7 @@ public class MainPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         if(session.getAttribute("userType") == null){
             
         session.setAttribute("userType", "Anon");

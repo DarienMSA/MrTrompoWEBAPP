@@ -35,7 +35,7 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="main.css">
-        
+
         <link rel="icon" href="assets/img/Logo/logoIcon.ico">
         <title>Mr. Trompo</title>
     </head>
@@ -83,9 +83,17 @@
                             </form>
                         </div>
                     </li>
-                    <% 
+                    <%
                         String errorDM;
-                        errorDM = (String)session.getAttribute("userType");
+                        errorDM = (String) session.getAttribute("userType");
+                        try {
+                            if (errorDM.equals("Admin")){
+                                
+                            }
+                            
+                        } catch (Exception e) {
+                            out.println("An exception occurred: " + e.getMessage());
+                        }
                         if (errorDM.equals("Admin")) {%>
                     <li class="nav-item" id="Nav-Acc" <% if (session.getAttribute("userType").equals("Anon")) {%> style="display:none;" <%}%>>
                         <a   class="nav-link" href="AdminPerfil" tabindex="-1" aria-disabled="false"><span> <i class="fas fa-user-circle"></i> Cuenta </span></a>
@@ -342,21 +350,22 @@
         </div>
 
         <jsp:include page="footer.jsp"/>
-        
+
         <script>
             window.sr = ScrollReveal();
             <%
-                    int contador2 = 1;
+                int contador2 = 1;
 
-                    for (products masVendidos : bestSellers) {
+                for (products masVendidos : bestSellers) {
             %>
             sr.reveal('#cardProd<%=contador2%>', {
-                viewfactor:0.2,
+                viewfactor: 0.2,
                 duration: 2000,
                 origin: 'bottom',
-                distance:'400px'
+                distance: '400px'
             });
-<%contador2++;}%>
+            <%contador2++;
+    }%>
         </script>
     </body>
 
