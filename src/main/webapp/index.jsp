@@ -83,15 +83,10 @@
                             </form>
                         </div>
                     </li>
-                    <%
-                        try {
-                            out.println(session.getAttribute("userType"));
-                        } catch (Exception e) {
-                            out.println("An exception occurred: " + e.getMessage());
-                        }
-
-                    %>
-                    <% if (session.getAttribute("userType").equals("Admin")) {%>
+                    <% 
+                        String errorDM;
+                        errorDM = (String)session.getAttribute("userType");
+                        if (errorDM.equals("Admin")) {%>
                     <li class="nav-item" id="Nav-Acc" <% if (session.getAttribute("userType").equals("Anon")) {%> style="display:none;" <%}%>>
                         <a   class="nav-link" href="AdminPerfil" tabindex="-1" aria-disabled="false"><span> <i class="fas fa-user-circle"></i> Cuenta </span></a>
                     </li>
