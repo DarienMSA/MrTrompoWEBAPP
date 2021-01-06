@@ -12,7 +12,7 @@
     
     <welcome-file-list>
         <welcome-file>
-            MainPageController
+            prueba.jsp
         </welcome-file>
     </welcome-file-list>
     

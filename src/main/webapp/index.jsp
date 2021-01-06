@@ -93,8 +93,10 @@
                             
                         } catch (Exception e) {
                             out.println("An exception occurred: " + e.getMessage());
-                        }
-                        if (errorDM.equals("Admin")) {%>
+                           %> 
+
+                        <%}%>
+                        <%if (errorDM.equals("Admin")) {%>
                     <li class="nav-item" id="Nav-Acc" <% if (session.getAttribute("userType").equals("Anon")) {%> style="display:none;" <%}%>>
                         <a   class="nav-link" href="AdminPerfil" tabindex="-1" aria-disabled="false"><span> <i class="fas fa-user-circle"></i> Cuenta </span></a>
                     </li>
