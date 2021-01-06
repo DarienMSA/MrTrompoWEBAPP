@@ -26,12 +26,12 @@ public class dbConnection{
         // la ruta que es localhost puerto 3306
         // el nombre de la base de datos que es pwDB
         // lo demas son parametros para que no tengan problemas con zonas horarias
-        dataSource.setUrl("jdbc:mysql://localhost:3306/mrtrompodb?useUnicode=true&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
+        dataSource.setUrl("jdbc:mysql://MYSQL5044.site4now.net:3306/db_a6d6a1_darienm?useUnicode=true&useJDBCCompliantTimeZoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC");
         // El nombre de usuario de su conexion
-        dataSource.setUsername("root");
+        dataSource.setUsername("a6d6a1_darienm");
         // La contraseña del usuario de su conexion
         
-        dataSource.setPassword("root");
+        dataSource.setPassword("darienm123");
         // dataSource.setMaxIdle(0);
         // dataSource.setMaxActive(100);
     }
