@@ -12,22 +12,16 @@
 
 
 <%
-    List<products> bestSellers = (List<products>) request.getAttribute("prodBestSellers");
+    if(session.getAttribute("userType") == null){
+            
+        session.setAttribute("userType", "Anon");
+        }
+    List<products> bestSellers = productsDAO.getBestSellers();
+    String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
+    session.setAttribute("tienePedidos", ped);
 %>
 
-<%
-    HttpSession sessionDM = request.getSession();
-        if(sessionDM.getAttribute("userType") == null){
-            
-        sessionDM.setAttribute("userType", "Anon");
-        }
-        List<products> bestSellerss = productsDAO.getBestSellers();
-        request.setAttribute("prodBestSellers", bestSellerss);
-        
 
-        String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)sessionDM.getAttribute("emailActual")));
-        
-        sessionDM.setAttribute("tienePedidos", ped);%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,20 +93,8 @@
                             </form>
                         </div>
                     </li>
-                    <%
-                        String errorDM;
-                        errorDM = (String) session.getAttribute("userType");
-                        try {
-                            if (errorDM.equals("Admin")){
-                                
-                            }
-                            
-                        } catch (Exception e) {
-                            out.println("An exception occurred: " + e.getMessage());
-                           %> 
-
-                        <%}%>
-                        <%if (errorDM.equals("Admin")) {%>
+ 
+                        <%if (session.getAttribute("userType").equals("Admin")) {%>
                     <li class="nav-item" id="Nav-Acc" <% if (session.getAttribute("userType").equals("Anon")) {%> style="display:none;" <%}%>>
                         <a   class="nav-link" href="AdminPerfil" tabindex="-1" aria-disabled="false"><span> <i class="fas fa-user-circle"></i> Cuenta </span></a>
                     </li>

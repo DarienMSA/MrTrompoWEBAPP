@@ -10,7 +10,6 @@ import com.mycompany.mrtrompoweb.dao.productsDAO;
 import com.mycompany.mrtrompoweb.models.products;
 import java.io.IOException;
 import java.io.PrintWriter;
-import static java.lang.System.console;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
+
 
 /**
  *
@@ -42,20 +40,19 @@ public class MainPageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        /*HttpSession session = request.getSession();
         if(session.getAttribute("userType") == null){
             
         session.setAttribute("userType", "Anon");
         }
-        showMessageDialog(null, "This is even shorter");
-        JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+  
         List<products> bestSellers = productsDAO.getBestSellers();
         request.setAttribute("prodBestSellers", bestSellers);
         
 
         String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         
-        session.setAttribute("tienePedidos", ped);
+        session.setAttribute("tienePedidos", ped);*/
         
        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
