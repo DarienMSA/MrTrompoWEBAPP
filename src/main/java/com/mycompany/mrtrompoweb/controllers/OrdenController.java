@@ -130,8 +130,9 @@ public class OrdenController extends HttpServlet {
          }
          
          ordenDAO.insertOrder(nuevoOrden);
-         session.getAttribute("OrdenActual");
-         ordenDAO.afterInsertOrder(Integer.parseInt((String)session.getAttribute("OrdenActual")), direccionActual.getId_address(), emailActual);
+         String hola = (String)session.getAttribute("OrdenActual");
+         
+         ordenDAO.afterInsertOrder(Integer.parseInt(hola), direccionActual.getId_address(), emailActual);
          String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         session.setAttribute("tienePedidos", ped);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////EMAIL
