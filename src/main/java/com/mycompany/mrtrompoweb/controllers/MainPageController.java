@@ -55,7 +55,7 @@ public class MainPageController extends HttpServlet {
 
         String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         
-        session.setAttribute("tienePedidos", "0");
+        session.setAttribute("tienePedidos", ped);
         
        request.getRequestDispatcher("index.jsp").forward(request, response);
     }

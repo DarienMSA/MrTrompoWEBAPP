@@ -4,6 +4,8 @@
     Author     : 52811
 --%>
 
+<%@page import="com.mycompany.mrtrompoweb.dao.pedidoDAO"%>
+<%@page import="com.mycompany.mrtrompoweb.dao.productsDAO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.mycompany.mrtrompoweb.models.products"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,6 +14,20 @@
 <%
     List<products> bestSellers = (List<products>) request.getAttribute("prodBestSellers");
 %>
+
+<%
+    HttpSession sessionDM = request.getSession();
+        if(sessionDM.getAttribute("userType") == null){
+            
+        sessionDM.setAttribute("userType", "Anon");
+        }
+        List<products> bestSellerss = productsDAO.getBestSellers();
+        request.setAttribute("prodBestSellers", bestSellerss);
+        
+
+        String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)sessionDM.getAttribute("emailActual")));
+        
+        sessionDM.setAttribute("tienePedidos", ped);%>
 <!DOCTYPE html>
 <html lang="en">
 
