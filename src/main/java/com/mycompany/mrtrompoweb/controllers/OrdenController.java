@@ -100,14 +100,14 @@ public class OrdenController extends HttpServlet {
             Tarjeta = true;
          String emailActual = (String)session.getAttribute("emailActual");
          List<pedido> PedidoActual = pedidoDAO.getPedidosActivosUser(emailActual);
-         for(pedido p : PedidoActual){
-             precioTotal += p.getPrecio_total();
-         }
+
          List<address> direccionesUser = addressDAO.getAddressUser(emailActual);
          address direccionActual = null;
          for(address a : direccionesUser){
-             if(a.isActivo())
+             if(a.isActivo()){
                  direccionActual = a;
+                 break;
+             }
          }
          user User = new user(emailActual);
          User = userDAO.searchEmail(User);
@@ -117,6 +117,7 @@ public class OrdenController extends HttpServlet {
         
         for(pedido p : PedidoActual){
             pedidos += "<h3 class=\"bold\">" + p.getNombre_prod() + " x" + Integer.toString(p.getCantidad()) + "</h3> <p class=\"pb-5 center\">" + p.getComentario() + "</p>";
+            precioTotal += p.getPrecio_total();
         }
          
          for(products Producto : Productos){
@@ -129,6 +130,8 @@ public class OrdenController extends HttpServlet {
          }
          
          ordenDAO.insertOrder(nuevoOrden);
+         session.getAttribute("OrdenActual");
+         ordenDAO.afterInsertOrder(Integer.parseInt((String)session.getAttribute("OrdenActual")), direccionActual.getId_address(), emailActual);
          String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         session.setAttribute("tienePedidos", ped);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////EMAIL
@@ -224,7 +227,7 @@ public class OrdenController extends HttpServlet {
         "<h3>Aquí están los datos de tu orden:</h3>" +
     "</div>" +
     "<div class=\"center\">" +
-        "<h3>Orden</h3>" +
+        "<h3>Orden #" + (String)session.getAttribute("OrdenActual") + "</h3>" +
                   pedidos +
     "</div>" +
     "<div class=\"center pt-5\">" +

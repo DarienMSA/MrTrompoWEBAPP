@@ -85,6 +85,35 @@ public class ordenDAO {
         return Ganancias;
     }
     
+    public static int afterInsertOrder(int id_orden, int id_address, String userEmail) {
+        Connection con = null;
+        try {
+            
+            con = dbConnection.getConnection();
+            
+            
+            
+            CallableStatement statement = con.prepareCall("CALL afterInsertOrder(?, ?, ?);");
+            statement.setInt(1, id_orden);
+            statement.setInt(2, id_address);
+            statement.setString(3, userEmail);
+            return statement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if(con != null){
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(userDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return 0;
+    }
+    
     public static int insertOrder(orden Orden) {
         Connection con = null;
         try {

@@ -523,7 +523,7 @@
                         <a id="orden<%=contador%>" href="javascript:void(0)" style="width:106%;" onclick="mostrarOrden('<%=o.getId_orden()%>', '<%=contador%>')" class="list-group-item list-group-item-action" aria-current="true" data-toggle="modal"
                            data-target="#mostrarPedido">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 id="id_pedido" class="mb-1">No. de Orden: #<%=o.getId_orden()%></h5>
+                                <h5 id="id_pedido" class="mb-1">Orden #<%=o.getId_orden()%></h5>
                                 <small><%=o.getFecha()%></small>
                             </div>
                             <br>

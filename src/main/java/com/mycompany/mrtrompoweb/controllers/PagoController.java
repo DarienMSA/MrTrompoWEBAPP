@@ -122,6 +122,7 @@ public class PagoController extends HttpServlet {
         
         int nextOrder = ordenDAO.nextOrder();
         request.setAttribute("nextOrder", nextOrder);
+        session.setAttribute("OrdenActual", nextOrder);
         List<pedido> PedidosUser = pedidoDAO.getPedidosActivosUser(emailActual);
         request.setAttribute("PedidosUser", PedidosUser);
         
