@@ -12,6 +12,7 @@
 <%
     List<pedido> PedidosUser = (List<pedido>) request.getAttribute("PedidosUser");
     int nextOrder = (int) request.getAttribute("nextOrder");
+    nextOrder = nextOrder + 9;
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -100,7 +100,9 @@ public class OrdenController extends HttpServlet {
             Tarjeta = true;
          String emailActual = (String)session.getAttribute("emailActual");
          List<pedido> PedidoActual = pedidoDAO.getPedidosActivosUser(emailActual);
-
+         for(pedido p : PedidoActual){
+            precioTotal += p.getPrecio_total();
+        }
          List<address> direccionesUser = addressDAO.getAddressUser(emailActual);
          address direccionActual = null;
          for(address a : direccionesUser){
@@ -117,7 +119,6 @@ public class OrdenController extends HttpServlet {
         
         for(pedido p : PedidoActual){
             pedidos += "<h3 class=\"bold\">" + p.getNombre_prod() + " x" + Integer.toString(p.getCantidad()) + "</h3> <p class=\"pb-5 center\">" + p.getComentario() + "</p>";
-            precioTotal += p.getPrecio_total();
         }
          
          for(products Producto : Productos){
@@ -130,10 +131,10 @@ public class OrdenController extends HttpServlet {
          }
          
          ordenDAO.insertOrder(nuevoOrden);
-         String hola = (String)session.getAttribute("OrdenActual");
+         int nextOrder = ordenDAO.nextOrder();
          
-         ordenDAO.afterInsertOrder(Integer.parseInt(hola), direccionActual.getId_address(), emailActual);
-         String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
+        ordenDAO.afterInsertOrder(nextOrder-1, direccionActual.getId_address(), emailActual);
+        String ped = Integer.toString(pedidoDAO.howManyActivePedidos((String)session.getAttribute("emailActual")));
         session.setAttribute("tienePedidos", ped);
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////EMAIL
         String from = "mrtrompo.lmad@gmail.com";
@@ -228,7 +229,7 @@ public class OrdenController extends HttpServlet {
         "<h3>Aquí están los datos de tu orden:</h3>" +
     "</div>" +
     "<div class=\"center\">" +
-        "<h3>Orden #" + (String)session.getAttribute("OrdenActual") + "</h3>" +
+        "<h3>Orden #" + Integer.toString(nextOrder - 1) + "</h3>" +
                   pedidos +
     "</div>" +
     "<div class=\"center pt-5\">" +

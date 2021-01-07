@@ -35,6 +35,16 @@ and open the template in the editor.
 .error{
     color:red;
 }
+
+#nameReg-error-db{
+    color: red;
+}
+#emailIS-error-db{
+    color: red;
+}
+#passwordIS-error-db{
+    color: red;
+}
 .navbarD-bg {
     background: rgb(166, 0, 0);
     background: linear-gradient(

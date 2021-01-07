@@ -134,7 +134,9 @@ $(document).ready(function () {
                         $("#iniciarSesion").modal('hide');
                         $("#usuarioiniciado").modal('show');
                         $("#Nav-Reg").hide();
+                       
                         $("#Nav-Is").hide();
+                         $("#Nav-Carr").show();
                         $("#Nav-Acc").show();
                         $("#Nav-Cerrar").show();
                     } else if (result == "UsuarioMal") {
